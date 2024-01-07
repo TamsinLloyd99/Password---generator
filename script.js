@@ -97,31 +97,68 @@ function getPasswordOptions() {
   } else if (length >= 128){
     alert ("Please pick a number less than 128.");
     getPasswordOptions();
-  }
+  }//User inputs under/equal to 8 or over/equal to 128 are invalid ^^
   alert ("You have chosen to generate a password that is " + length + " characters long!");
+
   let characterType = prompt ("Please pick the special characters you would like to include in your password.\n A.) Lowercase B.) Uppercase C.) Numeric \n D.) Special characters ($@%&*, etc.)");
+  //Save users character type choice as a variable ^^
+
   let upperCaseAnswer = characterType.toUpperCase();
+  //makes sure user input is changed to capital letters (if not already)
   let lowerCaseChoice;
   let upperCaseChoice;
   let numericChoice;
   let specialCharactersChoice;
+  let selectedCharacterTypes = [];
+//declare variables/array to be used in if statements below^^
 
-  if (upperCaseAnswer === "A" ){
-    lowerCaseChoice = alert ("You have chosen to add Lower Case letters to your pasword");
-  } else if (upperCaseAnswer === "B") {
+  if (upperCaseAnswer.includes("A")){
+    selectedCharacterTypes.push("Upper Case");
+    lowerCaseChoice = alert ("You have chosen to add Lower Case letters to your password");
+// if the user input contains "A", the string^^ will be pushed to the array selectedCharacterTypes, to be used later.
+// .includes checks user input instead of upperCaseAnswer === "A"
+  } if (upperCaseAnswer.includes("B")){
+    selectedCharacterTypes.push("Lower Case");
     upperCaseChoice = alert ("You have chosen to add Upper Case letters to your password");
-  } else if (upperCaseAnswer === "C"){
+  } if (upperCaseAnswer.includes("C")){
+    selectedCharacterTypes.push("Numerals");
     numericChoice = alert ("You have chosen to add Numerals to your password");
-  } else if (upperCaseAnswer === "D"){
+  } if (upperCaseAnswer.includes("D")){
+    selectedCharacterTypes.push("Special Characters");
     specialCharactersChoice = alert("You have chosen to add Special Characters to your password");
   }
+  console.log("Selected Character types" , selectedCharacterTypes);
+//used to check working code
 }
 
+let randomLowerCase;
+let randomUpperCase;
+let randomNumerals;
+let randomSpecialCharacters;
 
 // Function for getting a random element from an array
 function getRandom(arr) {
+let randomValue;
 
-}
+  if (selectedCharacterTypes.includes ("Lower Case")){
+    randomLowerCase = Math.floor(Math.random() * lowerCasedCharacters.length);   
+    randomValue = lowerCasedCharacters[randomLowerCase];
+  }
+  if (selectedCharacterTypes.includes ("Upper Case")){
+    randomUpperCase = Math.floor(Math.random() * upperCasedCharacters.length);
+    randomValue = upperCasedCharacters[randomUpperCase];
+  }
+  if (selectedCharacterTypes.includes ("Numerals")){
+    randomNumerals = Math.floor(Math.random() * numericCharacters.length);
+    randomValue = numericCharacters[randomNumerals];
+  }
+  if (selectedCharacterTypes.includes ("Special Characters")){
+    randomSpecialCharacters = Math.floor(Math.random() * specialCharacters.length);
+    randomValue = specialCharacters[randomSpecialCharacters];
+  }
+  return randomValue;
+  console.log(randomValue);
+}  
 
 // Function to generate password with user input
 function generatePassword() {
