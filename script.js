@@ -88,9 +88,16 @@ var upperCasedCharacters = [
   'Z'
 ];
 
+let randomLowerCase;
+let randomUpperCase;
+let randomNumerals;
+let randomSpecialCharacters;
+let randomPassword;
+
 // Function to prompt user for password options
 function getPasswordOptions() {
   let length = prompt ("How many letters would you like your password to be?");
+
   if (length <= 8){
     alert ("Please pick a number higher than 8.");
     getPasswordOptions();
@@ -114,27 +121,25 @@ function getPasswordOptions() {
 
   if (upperCaseAnswer.includes("A")){
     selectedCharacterTypes.push("Upper Case");
-    lowerCaseChoice = alert ("You have chosen to add Lower Case letters to your password");
+    lowerCaseChoice = alert ("You have chosen to use Lower Case letters to make up your password");
 // if the user input contains "A", the string^^ will be pushed to the array selectedCharacterTypes, to be used later.
 // .includes checks user input instead of upperCaseAnswer === "A"
   } if (upperCaseAnswer.includes("B")){
     selectedCharacterTypes.push("Lower Case");
-    upperCaseChoice = alert ("You have chosen to add Upper Case letters to your password");
+    upperCaseChoice = alert ("You have chosen to use Upper Case letters to make up your password");
   } if (upperCaseAnswer.includes("C")){
     selectedCharacterTypes.push("Numerals");
-    numericChoice = alert ("You have chosen to add Numerals to your password");
+    numericChoice = alert ("You have chosen to use Numerals to make up your password");
   } if (upperCaseAnswer.includes("D")){
     selectedCharacterTypes.push("Special Characters");
-    specialCharactersChoice = alert("You have chosen to add Special Characters to your password");
+    specialCharactersChoice = alert("You have chosen to use Special Characters to make up your password");
   }
   console.log("Selected Character types" , selectedCharacterTypes);
+  return length;
 //used to check working code
 }
 
-let randomLowerCase;
-let randomUpperCase;
-let randomNumerals;
-let randomSpecialCharacters;
+
 
 // Function for getting a random element from an array
 function getRandom(arr) {
@@ -156,17 +161,23 @@ let randomValue;
     randomSpecialCharacters = Math.floor(Math.random() * specialCharacters.length);
     randomValue = specialCharacters[randomSpecialCharacters];
   }
-  return randomValue;
-  console.log(randomValue);
+console.log(randomValue);
+return randomValue;
 }  
 
-// Function to generate password with user input
-function generatePassword() {
 
+// Function to generate password with user input
+function generatePassword(length) {
+  randomPassword = getRandom(length);
+  console.log(randomPassword);
 }
+const passwordLength = getPasswordOptions();
+generatePassword(passwordLength);
 
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
+
+
 
 // Write password to the #password input
 function writePassword() {
@@ -179,4 +190,4 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword);
 
-getPasswordOptions();
+// getPasswordOptions();
