@@ -98,9 +98,23 @@ function getPasswordOptions() {
     alert ("Please pick a number less than 128.");
     getPasswordOptions();
   }
-  alert ("You have chosen " + length + "!");
+  alert ("You have chosen to generate a password that is " + length + " characters long!");
   let characterType = prompt ("Please pick the special characters you would like to include in your password.\n A.) Lowercase B.) Uppercase C.) Numeric \n D.) Special characters ($@%&*, etc.)");
-  // if (characterType == )
+  let upperCaseAnswer = characterType.toUpperCase();
+  let lowerCaseChoice;
+  let upperCaseChoice;
+  let numericChoice;
+  let specialCharactersChoice;
+
+  if (upperCaseAnswer === "A" ){
+    lowerCaseChoice = alert ("You have chosen to add Lower Case letters to your pasword");
+  } else if (upperCaseAnswer === "B") {
+    upperCaseChoice = alert ("You have chosen to add Upper Case letters to your password");
+  } else if (upperCaseAnswer === "C"){
+    numericChoice = alert ("You have chosen to add Numerals to your password");
+  } else if (upperCaseAnswer === "D"){
+    specialCharactersChoice = alert("You have chosen to add Special Characters to your password");
+  }
 }
 
 
