@@ -182,7 +182,7 @@ function generatePassword(length) {
   console.log(randomPassword);
 }
 
-const passwordLength = getPasswordOptions();
+
 
 var generateBtn = document.querySelector('#generate');
 
@@ -194,6 +194,7 @@ var generateBtn = document.querySelector('#generate');
 console.log(password);
 // Write password to the #password input
 function writePassword() {
+  const passwordLength = getPasswordOptions();
   var password = generatePassword(passwordLength);
   console.log(password);
   var passwordText = document.querySelector('#password');
