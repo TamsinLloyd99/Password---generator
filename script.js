@@ -177,9 +177,7 @@ function generatePassword(length) {
     password += randomChars[randomIndex];
   }
 
-  randomPassword = password;
-  document.getElementById("generate").textContent = randomPassword;
-  console.log(randomPassword);
+return password
 }
 
 
