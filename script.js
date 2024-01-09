@@ -137,7 +137,6 @@ function getPasswordOptions() {
   }
   console.log("Selected Character types" , selectedCharacterTypes);
   return length;
-//used to check working code
 // function returns required length of password and chosen character types
 }
 
@@ -171,7 +170,7 @@ return randomValue;
 // Function to generate password with user input
 function generatePassword(length) {
   let password = "";
-  let randomChars = getRandom(length);
+  let randomChars = getRandom(selectedCharacterTypes);
 
   for (let i = 0; i < length; i++) {
     let randomIndex = Math.floor(Math.random() * randomChars.length);
@@ -179,7 +178,7 @@ function generatePassword(length) {
   }
 
   randomPassword = password;
-  document.getElementById("#generateBtn").textContent = randomPassword;
+  document.getElementById("generate").textContent = randomPassword;
   console.log(randomPassword);
 }
 
@@ -187,20 +186,22 @@ const passwordLength = getPasswordOptions();
 
 var generateBtn = document.querySelector('#generate');
 
-generateBtn.onClick = function (){
-  writePassword();
+// generateBtn.onClick = function (){
+//   writePassword();
 
-}
+// }
 
 
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword(passwordLength);
   var passwordText = document.querySelector('#password');
-
   passwordText.value = password;
 }
 
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword);
 
+// generateBtn.onClick = function (){
+//   writePassword();
+// }
