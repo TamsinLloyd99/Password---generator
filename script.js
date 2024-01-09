@@ -93,6 +93,7 @@ let randomUpperCase;
 let randomNumerals;
 let randomSpecialCharacters;
 let randomPassword;
+let selectedCharacterTypes = [];
 
 // Function to prompt user for password options
 function getPasswordOptions() {
@@ -116,7 +117,7 @@ function getPasswordOptions() {
   let upperCaseChoice;
   let numericChoice;
   let specialCharactersChoice;
-  let selectedCharacterTypes = [];
+  
 //declare variables/array to be used in if statements below^^
 
   if (upperCaseAnswer.includes("A")){
@@ -137,51 +138,64 @@ function getPasswordOptions() {
   console.log("Selected Character types" , selectedCharacterTypes);
   return length;
 //used to check working code
+// function returns required length of password and chosen character types
 }
-
-
 
 // Function for getting a random element from an array
 function getRandom(arr) {
-let randomValue;
+let randomValue = [];
 
   if (selectedCharacterTypes.includes ("Lower Case")){
     randomLowerCase = Math.floor(Math.random() * lowerCasedCharacters.length);   
-    randomValue = lowerCasedCharacters[randomLowerCase];
+    randomValue.push(lowerCasedCharacters[randomLowerCase]);
+    //.push saves the chosen character type/s to an empty array
   }
   if (selectedCharacterTypes.includes ("Upper Case")){
     randomUpperCase = Math.floor(Math.random() * upperCasedCharacters.length);
-    randomValue = upperCasedCharacters[randomUpperCase];
+    randomValue.push(upperCasedCharacters[randomUpperCase]);
   }
   if (selectedCharacterTypes.includes ("Numerals")){
     randomNumerals = Math.floor(Math.random() * numericCharacters.length);
-    randomValue = numericCharacters[randomNumerals];
+    randomValue.push(numericCharacters[randomNumerals]);
   }
   if (selectedCharacterTypes.includes ("Special Characters")){
     randomSpecialCharacters = Math.floor(Math.random() * specialCharacters.length);
-    randomValue = specialCharacters[randomSpecialCharacters];
+    randomValue.push(specialCharacters[randomSpecialCharacters]);
   }
 console.log(randomValue);
 return randomValue;
+// function returns random value made up of chosen character types
 }  
 
 
 // Function to generate password with user input
 function generatePassword(length) {
-  randomPassword = getRandom(length);
+  let password = "";
+  let randomChars = getRandom(length);
+
+  for (let i = 0; i < length; i++) {
+    let randomIndex = Math.floor(Math.random() * randomChars.length);
+    password += randomChars[randomIndex];
+  }
+
+  randomPassword = password;
+  document.getElementById("#generateBtn").textContent = randomPassword;
   console.log(randomPassword);
 }
-const passwordLength = getPasswordOptions();
-generatePassword(passwordLength);
 
-// Get references to the #generate element
+const passwordLength = getPasswordOptions();
+
 var generateBtn = document.querySelector('#generate');
 
+generateBtn.onClick = function (){
+  writePassword();
+
+}
 
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
+  var password = generatePassword(passwordLength);
   var passwordText = document.querySelector('#password');
 
   passwordText.value = password;
@@ -190,4 +204,3 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword);
 
-// getPasswordOptions();
