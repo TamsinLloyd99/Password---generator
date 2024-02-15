@@ -97,18 +97,41 @@ let selectedCharacterTypes = [];
 
 // Function to prompt user for password options
 function getPasswordOptions() {
-  let length = prompt ("How many letters would you like your password to be?");
+  let length = NaN;
 
-  if (length <= 8){
-    alert ("Please pick a number higher than 8.");
-    getPasswordOptions();
-  } else if (length >= 128){
-    alert ("Please pick a number less than 128.");
-    getPasswordOptions();
-  }//User inputs under/equal to 8 or over/equal to 128 are invalid ^^
-  alert ("You have chosen to generate a password that is " + length + " characters long!");
+  while (isNaN(length) || length < 8 || length > 128) {
+    length = prompt("How many characters would you like your password to be?");
 
-  let characterType = prompt ("Please pick the special characters you would like to include in your password.\n A.) Lowercase B.) Uppercase C.) Numeric \n D.) Special characters ($@%&*, etc.)");
+    if (length === null) {
+      return null; // User clicked Cancel, exit the function
+    }
+
+    length = parseInt(length);
+
+    if (isNaN(length) || length < 8 || length > 128) {
+      alert("Please enter a valid number between 8 and 128.");
+    }
+  }
+
+  alert("You have chosen to generate a password that is " + length + " characters long!");
+
+
+  let validCharacterTypes = ["A","B","C","D"];
+  let characterType = "";
+  
+  while (!validCharacterTypes.includes(characterType)) {
+    characterType = prompt("Please pick the character types you would like to include in your password:\n A.) Lowercase B.) Uppercase C.) Numeric D.) Special characters ($@%&*, etc.)");
+
+    if (characterType === null) {
+      return null; // User clicked Cancel, exit the function
+    }
+
+    characterType = characterType.toUpperCase();
+
+    if (!validCharacterTypes.includes(characterType)) {
+      alert("Please enter a valid option (A, B, C, or D).");
+    }
+  }
   //Save users character type choice as a variable ^^
 
   let upperCaseAnswer = characterType.toUpperCase();
@@ -184,10 +207,7 @@ return password
 
 var generateBtn = document.querySelector('#generate');
 
-// generateBtn.onClick = function (){
-//   writePassword();
 
-// }
 
 console.log(password);
 // Write password to the #password input
@@ -202,6 +222,3 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword);
 
-// generateBtn.onClick = function (){
-//   writePassword();
-// }
