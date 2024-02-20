@@ -97,6 +97,7 @@ let selectedCharacterTypes = [];
 
 // Function to prompt user for password options
 function getPasswordOptions() {
+  selectedCharacterTypes = [];
   let length = NaN;
 
   while (isNaN(length) || length < 8 || length > 128) {
@@ -144,12 +145,12 @@ function getPasswordOptions() {
 //declare variables/array to be used in if statements below^^
 
   if (upperCaseAnswer.includes("A")){
-    selectedCharacterTypes.push("Upper Case");
+    selectedCharacterTypes.push("Lower Case");
     lowerCaseChoice = alert ("You have chosen to use Lower Case letters to make up your password");
 // if the user input contains "A", the string^^ will be pushed to the array selectedCharacterTypes, to be used later.
 // .includes checks user input instead of upperCaseAnswer === "A"
   } if (upperCaseAnswer.includes("B")){
-    selectedCharacterTypes.push("Lower Case");
+    selectedCharacterTypes.push("Upper Case");
     upperCaseChoice = alert ("You have chosen to use Upper Case letters to make up your password");
   } if (upperCaseAnswer.includes("C")){
     selectedCharacterTypes.push("Numerals");
